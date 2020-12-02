@@ -179,7 +179,7 @@ object TabbedForm: TTabbedForm
     Size.Height = 548.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 11
+    TabIndex = 1
     TabOrder = 1
     TabPosition = Bottom
     Sizes = (
@@ -319,7 +319,7 @@ object TabbedForm: TTabbedForm
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -1809,13 +1809,15 @@ object TabbedForm: TTabbedForm
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 34.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
       Text = 'TabIAgenda'
+      ExplicitSize.cx = 34.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
       object ListAgenda: TListView
         ItemAppearanceClassName = 'TImageListItemBottomDetailAppearance'
         ItemEditAppearanceClassName = 'TImageListItemBottomDetailShowCheckAppearance'
