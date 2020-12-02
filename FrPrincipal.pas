@@ -267,6 +267,15 @@ type
     BarcodeScanner: TBarcodeScanner;
     fgProgressDialog: TfgProgressDialog;
     fgActivityDialog: TfgActivityDialog;
+    Label8: TLabel;
+    Layout4: TLayout;
+    Layout5: TLayout;
+    ListAgendaDia: TListBoxItem;
+    TabIAgenda: TTabItem;
+    ListAgenda: TListView;
+    ToolBar19: TToolBar;
+    Label29: TLabel;
+    Button4: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
@@ -330,6 +339,7 @@ type
       const AItem: TListViewItem);
     procedure imgQrcodClick(Sender: TObject);
     procedure BarcodeScannerScanResult(Sender: TObject; AResult: string);
+    procedure ListAgendaDiaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -339,6 +349,7 @@ type
     procedure AtualizaMesa(sMesa: string);
     procedure GetCarregaGrupos;
     procedure ListarMesasAbertas;
+    procedure ListaAgenda;
     procedure GetProduto(idGrupo: string);
     procedure GetProdutoCodigo(Codproduto: string);
     procedure VoltarMenu;
@@ -354,6 +365,7 @@ type
     function GetExistePreconta(NumMesa: string; IdAberturaCasa: string)
       : Boolean;
     function IsVariosSabores(idGrupo: string): Boolean;
+    function IsCartaoValido(Cartao: string): Boolean;
     function ConsultaVeiculo(Placa: string): Boolean;
     procedure VerificarExistePlaca(Placa: string);
     procedure LimpaVeiculos;
@@ -383,7 +395,7 @@ implementation
 
 {$R *.fmx}
 
-uses uDM, ToastClass;
+uses uDM, ToastClass, Loading;
 
 {$IFDEF ANDROID}
 
@@ -600,6 +612,12 @@ begin
     exit;
   end;
 
+  if not IsCartaoValido(edtMesa.Text) then
+  begin
+    ShowMessage('Eita o cartão não foi registrado');
+    exit;
+  end;
+
   // if IsRestauranteCasaAbertaMais24h then
   // begin
   // ShowMessage
@@ -665,12 +683,12 @@ begin
       ShowMessage('Informe a senha!');
       exit;
     end;
-    MSGShow('Verificando a senha informada....');
+    // MSGShow('Verificando a senha informada....');
     Login(edtSenha.Text);
-    MSGShow('Carregando o sistema, muita calma nessa hora....');
+    /// MSGShow('Carregando o sistema, muita calma nessa hora....');
   finally
-    GetProduto('0');
-    MSGHide;
+    // GetProduto('0');
+    // MSGHide;
   end;
 
 end;
@@ -1011,33 +1029,33 @@ end;
 
 procedure TTabbedForm.Button4Click(Sender: TObject);
 begin
-//  CarregaGrupoFiltro;
+  // CarregaGrupoFiltro;
 end;
 
 procedure TTabbedForm.CarregaGrupoFiltro;
 begin
-//  if DMD.GetHost <> EmptyStr then
-//  begin
-//    DMD.JSONToClientDataSet(DMD.cdsGrupo, 'GetJSONListaGrupo', '');
-//    if not DMD.cdsGrupo.IsEmpty then
-//    begin
-//      DMD.cdsGrupo.First;
-//      while not DMD.cdsGrupo.Eof do
-//      begin
-//        DMD.cdsGrupo.Edit;
-//        DMD.cdsGrupoDESC_GRUPO.AsString :=
-//          TiraAcentos(DMD.cdsGrupoDESC_GRUPO.AsString);
-//        DMD.cdsGrupo.Post;
-//
-//        listGrupo.Items.Add(DMD.cdsGrupoDESC_GRUPO.AsString);
-//        DMD.cdsGrupo.Next;
-//      end;
-//    end;
-//  end
-//  else
-//  begin
-//    ShowMessage('Configure o endereço do servidor!');
-//  end;
+  // if DMD.GetHost <> EmptyStr then
+  // begin
+  // DMD.JSONToClientDataSet(DMD.cdsGrupo, 'GetJSONListaGrupo', '');
+  // if not DMD.cdsGrupo.IsEmpty then
+  // begin
+  // DMD.cdsGrupo.First;
+  // while not DMD.cdsGrupo.Eof do
+  // begin
+  // DMD.cdsGrupo.Edit;
+  // DMD.cdsGrupoDESC_GRUPO.AsString :=
+  // TiraAcentos(DMD.cdsGrupoDESC_GRUPO.AsString);
+  // DMD.cdsGrupo.Post;
+  //
+  // listGrupo.Items.Add(DMD.cdsGrupoDESC_GRUPO.AsString);
+  // DMD.cdsGrupo.Next;
+  // end;
+  // end;
+  // end
+  // else
+  // begin
+  // ShowMessage('Configure o endereço do servidor!');
+  // end;
 end;
 
 procedure TTabbedForm.btnLimpaPesqClick(Sender: TObject);
@@ -1229,7 +1247,7 @@ begin
 
         end;
 
-      2, 7:
+      7:
         begin
           Key := 0;
           MessageDlg('Deseja sair da aplicação?',
@@ -1266,7 +1284,7 @@ end;
 procedure TTabbedForm.FormShow(Sender: TObject);
 begin
   pnlSabores.Visible := false;
-
+  TabGourmet.TabPosition := TTabPosition.None;
   // TabGourmet.TabPosition :
 end;
 
@@ -1500,7 +1518,7 @@ begin
 
     if DMD.cdsProduto.IsEmpty then
     begin
-      ShowMessage('Não existe produto!');
+      Toast('Não existe produto!', LongToast);
       { ListProdutoGrupo.Items.Clear;
         DMD.cdsProduto.First;
         while not DMD.cdsProduto.Eof do
@@ -1603,7 +1621,8 @@ var
 begin
   try
     try
-      MSGShow('Gravando dados no servidor....');
+      // MSGShow('Gravando dados no servidor....');
+
       if not DMD.cdsVendaItem.IsEmpty then
       begin
 
@@ -1650,6 +1669,7 @@ begin
         if rdbValor.IsChecked then
           TipoDesc := 2;
 
+
         // ShowMessage('http://' + DMD.GetHost +
         // ':8085/datasnap/rest/TDMServerM/SetJSONAddVendaRestaurante/' + Mesa + '/' +
         // IntToStr(QTDEPESSOA) + '/' + IDEMPRESA + '/' + Detalhe + '/' +
@@ -1658,6 +1678,18 @@ begin
         // + edtFone.Text + '/' + UpperCase(edtContato.Text) + '/' +
         // UpperCase(edtObsVenda.Text) + '/' + IntToStr(TipoDesc) + '/' +
         // edtDesconto.Text);
+
+        // ShowMessage('http://' + Host +
+        // ':8085/datasnap/rest/TDMServerM/SetJSONAddVendaRestaurante/' + Mesa +
+        // '/' + IntToStr(QTDEPESSOA) + '/' + IDEMPRESA + '/' + Detalhe + '/' +
+        // IntToStr(USU_CODIGO) + '/' + USU_LOGIN + '/' +
+        // UpperCase(edtPlaca.Text) + '/' + UpperCase(edtModelo.Text) + '/' +
+        // edtFone.Text + '/' + UpperCase(edtContato.Text) + '/' +
+        // UpperCase(edtObsVenda.Text) + '/' + IntToStr(TipoDesc) + '/' +
+        // edtDesconto.Text+'/1');
+        //
+        // Toast('depois do show');
+
         Host := DMD.GetHost;
         sResult_Get := DMD.IdHTTP1.Get('http://' + Host +
           ':8085/datasnap/rest/TDMServerM/SetJSONAddVendaRestaurante/' + Mesa +
@@ -1665,8 +1697,7 @@ begin
           IntToStr(USU_CODIGO) + '/' + USU_LOGIN + '/' +
           UpperCase(edtPlaca.Text) + '/' + UpperCase(edtModelo.Text) + '/' +
           edtFone.Text + '/' + UpperCase(edtContato.Text) + '/' +
-          UpperCase(edtObsVenda.Text) + '/' + IntToStr(TipoDesc) + '/' +
-          edtDesconto.Text);
+          UpperCase(edtObsVenda.Text) + '/' + IntToStr(TipoDesc) + '/0/1');
 
         // DMD.cdsProduto.EmptyDataSet;
         DMD.cdsVendaItem.EmptyDataSet;
@@ -1674,7 +1705,7 @@ begin
 
       end;
     finally
-      MSGHide;
+      // MSGHide;
       edtMesa.Text := '';
       lblMesaProduto.Text := 'CARTÃO : 0';
       lblMesaGrupo.Text := 'CARTÃO : 0';
@@ -1724,6 +1755,20 @@ begin
 {$ENDIF}
 end;
 
+function TTabbedForm.IsCartaoValido(Cartao: string): Boolean;
+var
+  valor: string;
+begin
+  { "result":[true] }
+  valor := DMD.IdHTTP1.Get('http://' + DMD.GetHost +
+    ':8085/datasnap/rest/TDMServerM/IsCartaoValido/' + Cartao);
+  valor := StringReplace(valor, '{"result":[', '', []);
+  valor := StringReplace(valor, ']}', '', []);
+
+  Result := StrToInt(valor) = 1;
+
+end;
+
 function TTabbedForm.IsRestauranteCasaAbertaMais24h: Boolean;
 var
   sDateTime: string;
@@ -1759,6 +1804,69 @@ begin
   edtContato.Text := '';
   edtObsVenda.Text := '';
   edtDesconto.Text := '';
+end;
+
+procedure TTabbedForm.ListaAgenda;
+var
+  LItem: TListViewItem;
+  HoraIni: TDateTime;
+begin
+  try
+
+    TLoading.Show(TabbedForm, 'Aguarde, carregando sua agenda...');
+
+    TThread.CreateAnonymousThread(
+      procedure
+      begin
+
+        DMD.JSONToClientDataSet(DMD.cdsAgenda, 'GetJSONListaAgendaDia',
+          IDVENDEDOR);
+
+        ListAgenda.Items.Clear;
+
+        if not DMD.cdsAgenda.IsEmpty then
+        begin
+
+          DMD.cdsAgenda.First;
+          while not DMD.cdsAgenda.Eof do
+          begin
+
+            LItem := ListAgenda.Items.Add;
+            LItem.Text := DMD.cdsAgendaNOMECLIENTE.AsString;
+
+            LItem.Detail := 'Data : ' + DMD.cdsAgendaDATAAGENDA.AsString +
+              ' Hora: ' + DMD.cdsAgendaHORA.AsString;
+
+            if DMD.cdsAgendaSTATUS.AsInteger > 0 then
+              LItem.Objects.AccessoryObject.Visible := true
+            else
+              LItem.Objects.AccessoryObject.Visible := false;
+
+            DMD.cdsAgenda.Next;
+          end;
+        end;
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            TLoading.Hide;
+          end);
+
+      end).Start;
+
+  except
+    on E: Exception do
+    begin
+      MSGHide;
+      ShowMessage('Problema ao carregar grupo : ' + E.Message);
+    end;
+  end;
+
+end;
+
+procedure TTabbedForm.ListAgendaDiaClick(Sender: TObject);
+begin
+  ListaAgenda;
+  TabGourmet.ActiveTab := TabIAgenda;
 end;
 
 procedure TTabbedForm.ListaProducaoCozItemClick(const Sender: TObject;
@@ -1804,7 +1912,7 @@ begin
 
       MSGShow('Carregando os cartões! Aguade por favor....');
       DMD.JSONToClientDataSet(DMD.cdsMesasAbertas,
-        'GetJSONListaMesaContaAbertas', IDEMPRESA);
+        'GetJSONListaMesaContaAbertas', IDEMPRESA + '/1');
 
       ListMesasAbertas.Items.Clear;
 
@@ -1820,11 +1928,13 @@ begin
 
           LItem := ListMesasAbertas.Items.Add;
           LItem.Text := 'Cartão : ' + FormatFloat('000',
-            DMD.cdsMesasAbertasNUM_MESA.AsFloat) + '   Total :' +
+            DMD.cdsMesasAbertasNUM_MESA.AsFloat) + ' - ' +
+            DMD.cdsMesasAbertasNOME_PESSOA.AsString;
+
+          LItem.Detail := 'Permanência : ' + FormatDateTime('hh:nn',
+            (Time - HoraIni)) + '   Total :' +
             DMD.cdsMesasAbertasTOTAL_LIQUIDO.AsString + ' Qtd Itens : ' +
             DMD.cdsMesasAbertasQTD_ITEM.AsString;
-          LItem.Detail := 'Permanência : ' + FormatDateTime('hh:nn',
-            (Time - HoraIni));
 
           DMD.cdsTempListaMesa.Insert;
           DMD.cdsTempListaMesaID.AsInteger := LItem.Index;
@@ -2122,53 +2232,75 @@ var
   str_result_Get: string;
   Parte: TStringList;
 begin
-  Parte := TStringList.Create;
+
   try
-    str_result_Get := DMD.IdHTTP1.Get('http://' + DMD.GetHost +
-      ':8085/datasnap/rest/TDMServerM/GetLoginGarcom/' + senha);
+    TLoading.Show(TabbedForm, 'Aguarde estou validando sua senha...');
 
-    str_result_Get := StringReplace(str_result_Get, '{"result":["', '', []);
-    str_result_Get := StringReplace(str_result_Get, '"]}', '', []);
-    str_result_Get := StringReplace(str_result_Get, '[[', '', []);
-    str_result_Get := StringReplace(str_result_Get, ']]', '', []);
-
-    if str_result_Get <> EmptyStr then
-    begin
-
-      Parte.Clear;
-      ExtractStrings(['|'], [], PChar(str_result_Get), Parte);
-
-      if Parte[3] = EmptyStr then
+    TThread.CreateAnonymousThread(
+      procedure
       begin
-        ShowMessage
-          ('Você deve informar o profissional no cadastro de funcionário!');
-        exit;
-      end;
+        Parte := TStringList.Create;
+        str_result_Get := DMD.IdHTTP1.Get('http://' + DMD.GetHost +
+          ':8085/datasnap/rest/TDMServerM/GetLoginGarcom/' + senha);
 
-      USU_CODIGO := StrToInt(Parte[0]);
-      USU_LOGIN := Parte[1];
-      IDEMPRESA := Parte[2];
-      IDVENDEDOR := Parte[3];
-      VENDA_IDCLIENTEPADRAO := Parte[4];
+        str_result_Get := StringReplace(str_result_Get, '{"result":["', '', []);
+        str_result_Get := StringReplace(str_result_Get, '"]}', '', []);
+        str_result_Get := StringReplace(str_result_Get, '[[', '', []);
+        str_result_Get := StringReplace(str_result_Get, ']]', '', []);
 
-      if IDVENDEDOR <> '' then
-      begin
-        lblGarcon.Text := 'PROF. : ' + USU_LOGIN;
-        // IdAberturaCasa := DMD.cdsCasaAbertaIDABERTURACASA.AsString;
-        GetCarregaGrupos;
-        TabGourmet.ActiveTab := TabMenu;
-      end
-      else
-      begin
-        ShowMessage('Não encontrado o profissional!');
-        exit;
-      end;
+        if str_result_Get <> EmptyStr then
+        begin
+          Label8.Visible := false;
+          Parte.Clear;
+          ExtractStrings(['|'], [], PChar(str_result_Get), Parte);
 
-    end
-    else
-      ShowMessage('Usuário não encontrado!');
+          if Parte[3] = EmptyStr then
+          begin
+            ShowMessage
+              ('Você deve informar o profissional no cadastro de funcionário!');
+            exit;
+          end;
+
+          USU_CODIGO := StrToInt(Parte[0]);
+          USU_LOGIN := Parte[1];
+          IDEMPRESA := Parte[2];
+          IDVENDEDOR := Parte[3];
+          VENDA_IDCLIENTEPADRAO := Parte[4];
+
+          if IDVENDEDOR <> '' then
+          begin
+            lblGarcon.Text := 'PROF. : ' + USU_LOGIN;
+            // IdAberturaCasa := DMD.cdsCasaAbertaIDABERTURACASA.AsString;
+            GetCarregaGrupos;
+            GetProduto('0');
+            TabGourmet.ActiveTab := TabMenu;
+          end
+          else
+          begin
+            Label8.Text := 'Erro ao validar o login';
+            Label8.Visible := true;
+
+            // exit;
+          end;
+
+        end
+        else
+        begin
+          Label8.Text := 'Erro: sem retorno do servidor';
+          Label8.Visible := true;
+
+        end;
+        Parte.Free;
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            TLoading.Hide;
+          end);
+
+      end).Start;
+
   finally
-    Parte.Free;
+
   end;
 
 end;

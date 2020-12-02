@@ -214,11 +214,16 @@ object DMD: TDMD
         Name = 'SENHAPRECONTA'
         DataType = ftString
         Size = 40
+      end
+      item
+        Name = 'NOME_PESSOA'
+        DataType = ftString
+        Size = 100
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 504
+    Left = 488
     Top = 72
     object cdsMesasAbertasNUM_MESA: TStringField
       FieldName = 'NUM_MESA'
@@ -245,6 +250,10 @@ object DMD: TDMD
     object cdsMesasAbertasSENHAPRECONTA: TStringField
       FieldName = 'SENHAPRECONTA'
       Size = 40
+    end
+    object cdsMesasAbertasNOME_PESSOA: TStringField
+      FieldName = 'NOME_PESSOA'
+      Size = 100
     end
   end
   object cdsProdutoObs: TClientDataSet
@@ -502,6 +511,56 @@ object DMD: TDMD
     object cdsProdutoProducaoGARCOM: TStringField
       FieldName = 'GARCOM'
       Size = 120
+    end
+  end
+  object cdsAgenda: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'DATAAGENDA'
+        DataType = ftDate
+      end
+      item
+        Name = 'NOMECLIENTE'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'TELEFONE'
+        DataType = ftString
+        Size = 14
+      end
+      item
+        Name = 'STATUS'
+        DataType = ftInteger
+      end
+      item
+        Name = 'HORA'
+        DataType = ftString
+        Size = 15
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 168
+    Top = 248
+    object cdsAgendaDATAAGENDA: TDateField
+      FieldName = 'DATAAGENDA'
+    end
+    object cdsAgendaNOMECLIENTE: TStringField
+      FieldName = 'NOMECLIENTE'
+      Size = 100
+    end
+    object cdsAgendaTELEFONE: TStringField
+      FieldName = 'TELEFONE'
+      Size = 14
+    end
+    object cdsAgendaSTATUS: TIntegerField
+      FieldName = 'STATUS'
+    end
+    object cdsAgendaHORA: TStringField
+      FieldName = 'HORA'
+      Size = 15
     end
   end
 end

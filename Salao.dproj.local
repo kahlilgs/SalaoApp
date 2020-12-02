@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015/03/12 02:48:22.000.662,C:\Users\Tran\Desktop\TKRBarCodeSanner\Example\UnitMainForm.fmx=C:\Users\Tran\Desktop\DataPak Android Components\BarcodeScanner\Example\UnitMainForm.fmx</Transaction>
+    <Transaction>2015/03/12 02:48:22.000.662,C:\Users\Tran\Desktop\TKRBarCodeSanner\Example\UnitMainForm.pas=C:\Users\Tran\Desktop\DataPak Android Components\BarcodeScanner\Example\UnitMainForm.pas</Transaction>
+    <Transaction>2015/03/12 02:48:49.000.500,C:\Users\Tran\Desktop\TKRBarCodeSanner\Example\TKRBarCodeSannerExample.dproj=C:\Users\Tran\Desktop\DataPak Android Components\BarcodeScanner\Example\BarcodeSannerExample.dproj</Transaction>
+    <Transaction>2020/11/02 17:25:08.620,=D:\_Producao\Componente\XE10\BarcodeScanner\Example\FrPrincipal.pas</Transaction>
+    <Transaction>2020/11/02 17:25:08.638,=D:\_Producao\Componente\XE10\BarcodeScanner\Example\ToastClass.pas</Transaction>
+    <Transaction>2020/11/02 17:25:31.499,=D:\_Producao\Componente\XE10\BarcodeScanner\Example\uDM.pas</Transaction>
+    <Transaction>2020/11/02 17:27:23.867,D:\_Producao\Componente\XE10\BarcodeScanner\Example\Salao.dproj=D:\_Producao\Componente\XE10\BarcodeScanner\Example\BarcodeSannerExample.dproj</Transaction>
+    <Transaction>2020/11/02 17:30:07.267,D:\_Producao\Componente\XE10\BarcodeScanner\Example\UnitMainForm.pas=</Transaction>
+    <Transaction>2020/11/02 17:43:36.931,=D:\_Producao\Componente\XE10\BarcodeScanner\Example\Loading.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android=""/>
+	</ActiveMobileDevice>
+</BorlandProject>

@@ -100,6 +100,13 @@ type
     cdsVendaItemID: TIntegerField;
     cdsPreContaDetalheID: TIntegerField;
     cdsProdutoIDGRUPO: TStringField;
+    cdsMesasAbertasNOME_PESSOA: TStringField;
+    cdsAgenda: TClientDataSet;
+    cdsAgendaDATAAGENDA: TDateField;
+    cdsAgendaNOMECLIENTE: TStringField;
+    cdsAgendaTELEFONE: TStringField;
+    cdsAgendaSTATUS: TIntegerField;
+    cdsAgendaHORA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

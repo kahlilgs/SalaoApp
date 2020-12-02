@@ -2,9 +2,12 @@ program Salao;
 
 uses
   System.StartUpCopy,
+  FMX.MobilePreview,
   FMX.Forms,
   FrPrincipal in 'FrPrincipal.pas' {TabbedForm},
-  uDM in 'uDM.pas' {DMD: TDataModule};
+  ToastClass in 'ToastClass.pas',
+  uDM in 'uDM.pas' {DMD: TDataModule},
+  Loading in 'Loading.pas';
 
 {$R *.res}
 

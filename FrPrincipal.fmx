@@ -179,10 +179,12 @@ object TabbedForm: TTabbedForm
     Size.Height = 548.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 1
+    TabIndex = 11
     TabOrder = 1
     TabPosition = Bottom
     Sizes = (
+      397s
+      499s
       397s
       499s
       397s
@@ -210,7 +212,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemtoprated'
@@ -297,6 +299,19 @@ object TabbedForm: TTabbedForm
             Text = 'Senha : '
             TabOrder = 4
           end
+          object Label8: TLabel
+            StyledSettings = [Family, Style]
+            Position.X = 72.000000000000000000
+            Position.Y = 176.000000000000000000
+            Size.Width = 255.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 15.000000000000000000
+            TextSettings.FontColor = claCrimson
+            TextSettings.HorzAlign = Center
+            Visible = False
+            TabOrder = 5
+          end
         end
       end
     end
@@ -304,8 +319,8 @@ object TabbedForm: TTabbedForm
       CustomIcon = <
         item
         end>
-      IsSelected = True
-      Size.Width = 36.000000000000000000
+      IsSelected = False
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemcontacts'
@@ -374,6 +389,13 @@ object TabbedForm: TTabbedForm
           Visible = False
           OnClick = ListConsultarVeiculoClick
         end
+        object ListAgendaDia: TListBoxItem
+          ItemData.Accessory = aMore
+          Position.Y = 118.000000000000000000
+          TabOrder = 6
+          Text = 'AGENDA DO DIA'
+          OnClick = ListAgendaDiaClick
+        end
       end
       object ToolBar6: TToolBar
         Size.Width = 397.000000000000000000
@@ -406,7 +428,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemrecent'
@@ -446,61 +468,83 @@ object TabbedForm: TTabbedForm
         Align = Top
         Position.Y = 48.000000000000000000
         Size.Width = 397.000000000000000000
-        Size.Height = 193.000000000000000000
+        Size.Height = 105.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
-        object Label7: TLabel
-          Position.X = 8.000000000000000000
-          Position.Y = 24.000000000000000000
-          Size.Width = 73.000000000000000000
-          Size.Height = 24.000000000000000000
+        object Layout4: TLayout
+          Align = Right
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 15.000000000000000000
+          Position.X = 256.000000000000000000
+          Size.Width = 126.000000000000000000
+          Size.Height = 105.000000000000000000
           Size.PlatformDefault = False
-          Text = 'CART'#195'O'
-          TabOrder = 3
+          TabOrder = 1
+          object btnConfirmar: TButton
+            Anchors = [akTop, akRight]
+            Margins.Right = 10.000000000000000000
+            Position.X = 9.000000000000000000
+            Position.Y = 42.000000000000000000
+            Size.Width = 113.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'LAN'#199'AR'
+            OnClick = btnConfirmarClick
+          end
         end
-        object edtMesa: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 0
-          KeyboardType = NumberPad
-          Position.X = 8.000000000000000000
-          Position.Y = 52.000000000000000000
-          Size.Width = 129.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-        end
-        object btnConfirmar: TButton
-          Position.X = 224.000000000000000000
-          Position.Y = 50.000000000000000000
-          Size.Width = 145.000000000000000000
-          Size.Height = 35.000000000000000000
+        object Layout5: TLayout
+          Align = Client
+          Anchors = [akLeft, akTop, akBottom]
+          Margins.Left = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Size.Width = 236.000000000000000000
+          Size.Height = 105.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          Text = 'LAN'#199'AR'
-          OnClick = btnConfirmarClick
-        end
-        object imgQrcod: TImage
-          MultiResBitmap = <
-            item
-              Width = 50
-              Height = 50
-              PNG = {
-                89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
-                B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                0118494441546843ED95D10EC3200845BBFDFF3F77A5B18B1241B0D06CC24988
-                0FB550EF15BA2549C2F22A6BCD5E562DBD5C124CEABDCBFAF7708E4815C6FB29
-                85A97C77EB9D2CE388E420A0402FBCE8D5826009E588152A85B5A4230C304DEA
-                7884651CE92976DD5FA99AA3FD543F5CFB4DEA79380285EA78849E0AB3C5B1C2
-                23B4FB31EE8E5040E13A4C314F784029EC51EBCBD2538BE3B1E63D507DDB328E
-                781E041475ED8B9A303D72A727AEDC77FF13A22918DE91FA3D9162049C5BCB38
-                0207E00EDA90E3D708B81E38A6987ED111E9756ABE7DE9A9256E3084D4DDD9FC
-                98788E6815B676449AEF2494239482F839A5A0D4012D4DBDFC211A008AF6628A
-                74E4D70835B54668F78F904EB9A65E0847B4A423499278B36D1FC1823D46CCAD
-                3DB50000000049454E44AE426082}
-              FileName = 'C:\_Producao\Fontes\App\img\QR Code_50px.png'
-            end>
-          Position.X = 152.000000000000000000
-          Position.Y = 40.000000000000000000
-          OnClick = imgQrcodClick
+          object edtMesa: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 0
+            KeyboardType = NumberPad
+            Position.X = 9.000000000000000000
+            Position.Y = 48.000000000000000000
+            Size.Width = 129.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object imgQrcod: TImage
+            MultiResBitmap = <
+              item
+                Width = 50
+                Height = 50
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                  B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0118494441546843ED95D10EC3200845BBFDFF3F77A5B18B1241B0D06CC24988
+                  0FB550EF15BA2549C2F22A6BCD5E562DBD5C124CEABDCBFAF7708E4815C6FB29
+                  85A97C77EB9D2CE388E420A0402FBCE8D5826009E588152A85B5A4230C304DEA
+                  7884651CE92976DD5FA99AA3FD543F5CFB4DEA79380285EA78849E0AB3C5B1C2
+                  23B4FB31EE8E5040E13A4C314F784029EC51EBCBD2538BE3B1E63D507DDB328E
+                  781E041475ED8B9A303D72A727AEDC77FF13A22918DE91FA3D9162049C5BCB38
+                  0207E00EDA90E3D708B81E38A6987ED111E9756ABE7DE9A9256E3084D4DDD9FC
+                  98788E6815B676449AEF2494239482F839A5A0D4012D4DBDFC211A008AF6628A
+                  74E4D70835B54668F78F904EB9A65E0847B4A423499278B36D1FC1823D46CCAD
+                  3DB50000000049454E44AE426082}
+                FileName = 'C:\_Producao\Fontes\App\img\QR Code_50px.png'
+              end>
+            Position.X = 150.000000000000000000
+            Position.Y = 38.000000000000000000
+            OnClick = imgQrcodClick
+          end
+          object Label7: TLabel
+            Position.X = 9.000000000000000000
+            Position.Y = 24.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 24.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'CART'#195'O'
+            TabOrder = 2
+          end
         end
       end
     end
@@ -509,7 +553,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'tabitemmostrecent'
@@ -605,7 +649,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1093,7 +1137,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1136,7 +1180,7 @@ object TabbedForm: TTabbedForm
         Size.Height = 451.000000000000000000
         Size.PlatformDefault = False
         TabHeight = 49.000000000000000000
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         TabPosition = None
         Sizes = (
@@ -1148,7 +1192,7 @@ object TabbedForm: TTabbedForm
           CustomIcon = <
             item
             end>
-          IsSelected = False
+          IsSelected = True
           Size.Width = 10.000000000000000000
           Size.Height = 10.000000000000000000
           Size.PlatformDefault = False
@@ -1175,7 +1219,7 @@ object TabbedForm: TTabbedForm
           CustomIcon = <
             item
             end>
-          IsSelected = True
+          IsSelected = False
           Size.Width = 10.000000000000000000
           Size.Height = 10.000000000000000000
           Size.PlatformDefault = False
@@ -1236,7 +1280,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1317,7 +1361,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1446,7 +1490,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1634,7 +1678,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 36.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1711,7 +1755,7 @@ object TabbedForm: TTabbedForm
         item
         end>
       IsSelected = False
-      Size.Width = 37.000000000000000000
+      Size.Width = 33.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -1758,6 +1802,60 @@ object TabbedForm: TTabbedForm
           StyleLookup = 'refreshtoolbutton'
           Text = 'btnConfig'
           OnClick = btnCarregarProducaoClick
+        end
+      end
+    end
+    object TabIAgenda: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 34.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabIAgenda'
+      object ListAgenda: TListView
+        ItemAppearanceClassName = 'TImageListItemBottomDetailAppearance'
+        ItemEditAppearanceClassName = 'TImageListItemBottomDetailShowCheckAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Size.Width = 397.000000000000000000
+        Size.Height = 451.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ItemAppearanceObjects.ItemObjects.Accessory.AccessoryType = Checkmark
+        ItemAppearanceObjects.ItemObjects.Image.Visible = False
+        OnItemClick = ListMesasAbertasItemClick
+      end
+      object ToolBar19: TToolBar
+        Size.Width = 397.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label29: TLabel
+          Align = Contents
+          Size.Width = 397.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toollabel'
+          TextSettings.HorzAlign = Center
+          Text = 'AGENDA DO DIA'
+          TabOrder = 2
+        end
+        object Button4: TButton
+          Align = Right
+          Margins.Right = 8.000000000000000000
+          Position.X = 341.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'replytoolbutton'
+          TabOrder = 1
+          Text = 'btnConfig'
+          OnClick = btnVoltaAbetasClick
         end
       end
     end
