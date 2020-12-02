@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{13D88586-3A1C-49CE-9F6F-711D801D2F9B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Salao.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Salao">
+        <MSBuild Projects="Salao.dproj"/>
+    </Target>
+    <Target Name="Salao:Clean">
+        <MSBuild Projects="Salao.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Salao:Make">
+        <MSBuild Projects="Salao.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Salao"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Salao:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Salao:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
