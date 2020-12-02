@@ -179,7 +179,7 @@ object TabbedForm: TTabbedForm
     Size.Height = 548.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 2
+    TabIndex = 5
     TabOrder = 1
     TabPosition = Bottom
     Sizes = (
@@ -245,7 +245,7 @@ object TabbedForm: TTabbedForm
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.StyleExt = {00070000000000000004000000}
-          Text = 'V. 2.0.1'
+          Text = 'V. 1.0.0.0'
         end
       end
       object Rectangle1: TRectangle
@@ -405,7 +405,7 @@ object TabbedForm: TTabbedForm
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 36.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -500,6 +500,7 @@ object TabbedForm: TTabbedForm
             end>
           Position.X = 152.000000000000000000
           Position.Y = 40.000000000000000000
+          OnClick = imgQrcodClick
         end
       end
     end
@@ -1091,7 +1092,7 @@ object TabbedForm: TTabbedForm
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 36.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -34809,15 +34810,10 @@ object TabbedForm: TTabbedForm
     Left = 144
     Top = 368
   end
-  object AniIndicator1: TAniIndicator
-    Align = Center
-    Enabled = True
-    Style = Circular
-  end
   object GestureManager1: TGestureManager
     Sensitivity = 80.000000000000000000
     Left = 304
-    Top = 480
+    Top = 416
     GestureData = <
       item
         Control = Owner
@@ -34832,6 +34828,7 @@ object TabbedForm: TTabbedForm
   end
   object BarcodeScanner: TBarcodeScanner
     BarcodeTypes = [btOneD, btQRCode, btProduct, btDataMatrix]
+    OnScanResult = BarcodeScannerScanResult
     Left = 88
     Top = 512
   end
@@ -34840,5 +34837,11 @@ object TabbedForm: TTabbedForm
     Max = 100.000000000000000000
     Left = 24
     Top = 505
+  end
+  object fgActivityDialog: TfgActivityDialog
+    Message = 'Por favor, Aguarde!'
+    Title = 'Verificando o Servidor'
+    Left = 32
+    Top = 504
   end
 end
